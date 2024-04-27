@@ -18,19 +18,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
-    private String firstName;
-
-
+    private String fullName;
     private String email;
-
-
     private String password;
 
 
-    private USER_ROLE role=USER_ROLE.ROLE_CUSTOMER;
+    private USER_ROLE role = USER_ROLE.ROLE_CUSTOMER;
 
     @JsonIgnore
+    //when ever we fetch the user we don't need the list of order
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer")//avoid creation of separate table
     private List<Order> orders =  new ArrayList<>();
 
