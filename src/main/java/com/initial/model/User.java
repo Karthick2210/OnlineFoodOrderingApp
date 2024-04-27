@@ -26,7 +26,6 @@ public class User {
     private USER_ROLE role = USER_ROLE.ROLE_CUSTOMER;
 
     @JsonIgnore
-    //when ever we fetch the user we don't need the list of order
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer")//avoid creation of separate table
     private List<Order> orders =  new ArrayList<>();
 
