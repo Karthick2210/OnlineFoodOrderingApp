@@ -6,8 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -27,7 +27,9 @@ public class Restaurant {
 
     private String description;
 
-    @OneToOne
+    private String CuisineType;
+
+    @ManyToOne
     private Address address;
 
     @Embedded
@@ -43,7 +45,7 @@ public class Restaurant {
     @Column(length = 1000)
     private  List<String> images;
 
-    private Date registrationDate;
+    private LocalDateTime registrationDate;
 
     private boolean open;
 
