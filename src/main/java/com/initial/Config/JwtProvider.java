@@ -8,7 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.security.Key;
 import java.util.*;
 
 @Service
@@ -26,24 +25,25 @@ public class JwtProvider {
                .claim("authorities",roles)
                .signWith(key)
                .compact();
+       System.out.println("generateToken--------"+jwt);
        return  jwt;
    }
 
    public  String getEmailFromJwtToken(String jwt){
        jwt = jwt.substring(7);//separating the token bearer
+       System.out.println("JWT--------"+jwt);
        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
-       String email  = String.valueOf(claims.get("emial"));
-       return email;
-
+       System.out.println("claims--------"+claims);
+       String user_Email = String.valueOf(claims.get("email"));
+       System.out.println("user_Email--------"+ user_Email);
+       return user_Email;
    }
 
     private String populateAuthorities(Collection<? extends GrantedAuthority> authorities) {
-
         Set<String> auth = new HashSet<>() ;
         for (GrantedAuthority grantedAuthority:authorities){
             auth.add(grantedAuthority.getAuthority());
         }
-
        return  String.join(",",auth);
     }
 

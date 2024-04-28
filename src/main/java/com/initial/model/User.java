@@ -1,6 +1,7 @@
 package com.initial.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.initial.dto.RestaurantDto;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,6 +21,8 @@ public class User {
 
     private String fullName;
     private String email;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
 
